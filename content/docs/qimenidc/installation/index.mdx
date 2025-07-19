@@ -1,6 +1,19 @@
 ---
 title: 安装流程
-description: Your first document
+description: QimenIDC部署整体流程
 ---
+## 介绍
+QimenIDC的控制系统是前后端分离的，故您需要安装QimenIDC-Client和QimenIDC-backend
+
+## 安装顺序
 
 
+
+## 端口开放说明：
+宿主机需要开放：
+| 端口范围         | 协议 | 用途              | 是否可更改 |
+|------------------|------|-------------------|------------|
+| 8006             | TCP  | PVE Web 管理界面  | ✅ 可更改   |
+| 6080             | TCP  | VNC 控制器        | ❌ 不可更改 |
+| 7600             | TCP  | 被控端口          | ✅ 可更改   |
+| 59000 - 65535    | TCP  | 虚拟机 VNC 端口段 | ❌ 不可更改 |
