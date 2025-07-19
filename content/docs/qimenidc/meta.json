@@ -1,0 +1,23 @@
+{
+  "title": "QimenIDC",
+  "description": "QimenIDC 文档",
+  "icon": "Building",
+  "root": true,
+  "pages": [
+    "---介绍---",
+    "index",
+    "what-is-qimenidc",
+    "comparisons",
+    "---安装---",
+    "(installation)",
+    "...",
+    "(integrations)",
+    "---常见问题---",
+    "customisation",
+    "theme",
+    "search",
+    "components",
+    "mdx",
+    "layouts"
+  ]
+}

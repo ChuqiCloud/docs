@@ -1,0 +1,6 @@
+{
+  "title": "安装",
+  "icon": "MyIcon",
+  "pages": ["index", "backend", "client"],
+  "defaultOpen": true
+}

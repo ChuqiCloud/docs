@@ -1,0 +1,6 @@
+{
+  "title": "集成",
+  "icon": "MyIcon",
+  "pages": ["idcsmart", "other"],
+  "defaultOpen": true
+}
