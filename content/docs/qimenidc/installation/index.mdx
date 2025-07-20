@@ -2,11 +2,41 @@
 title: 安装流程
 description: QimenIDC部署整体流程
 ---
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
 ## 介绍
-QimenIDC的控制系统是前后端分离的，故您需要安装QimenIDC-Client和QimenIDC-backend
+QimenIDC的控制系统是前后端分离的，故您需要安装`QimenIDC-Client`和`QimenIDC-backend`
+架构图如下
+<img 
+  src="https://img.xwyue.com/i/2025/07/20/687c6ed392630.png" 
+  alt="QimenIDC 架构图"
+  className="rounded-lg border border-fd-border"
+/>
 
 ## 安装顺序
+<Steps>
+<Step>
 
+[安装后端](/docs/qimenidc/installation/backend)
+
+</Step>
+
+<Step>
+
+[安装前端](/docs/qimenidc/installation/client)
+
+</Step>
+<Step>
+
+[配置宿主机]()
+
+</Step>
+<Step>
+
+[安装被控](/docs/qimenidc/installation/agent)
+
+</Step>
+</Steps>
 
 
 ## 端口开放说明：
