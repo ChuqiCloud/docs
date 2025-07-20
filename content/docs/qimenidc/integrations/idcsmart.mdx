@@ -2,3 +2,65 @@
 title: 魔方财务
 description: 在魔方财务对接QimenIDC以销售
 ---
+## 下载插件
+插件下载地址1：[魔方应用商店](https://my.idc132rt.com/shop/shop_detail.html?id=1825&clientId=1132)
+
+## 对接接口
+<img 
+  src="https://img.xwyue.com/i/2023/12/07/6571b6740e97c.png" 
+  alt="对接接口1"
+  className="rounded-lg border border-fd-border"
+/>
+
+<img 
+  src="https://img.xwyue.com/i/2023/12/07/6571b6d1b64c0.png" 
+  alt="对接接口2"
+  className="rounded-lg border border-fd-border"
+/>
+
+## 商品配置
+QimenIDC插件拥有两种配置模式，可以弹性配置和固定套餐
+
+### 弹性配置
+<img 
+  src="https://img.xwyue.com/i/2023/12/07/6571b74708da8.png" 
+  alt="弹性配置"
+  className="rounded-lg border border-fd-border"
+/>
+
+弹性配置与魔方云、NOKVM的配置相同，配置项名称为 配置项\|前台显示名称，配置项如下：
+
+|配置项名称|配置项参数|参数说明|必选|未传参默认值|
+|--------|---------|-------|----|---------|
+|Location\|数据中心|1\|CN^香港CN2|||
+|nodeid\|节点ID|1\|PVE节点|40G|√|
+|configureTemplateId\|配置模板ID|1\|1h1g模板|1为QimenIDC中配置模板ID||
+|Memory\|内存|2048\|2GB|2048为内存大小，单位M|√|默认1024
+|bandwidth\|带宽|100\|100MBps|100为带宽大小，单位MBps|√|默认1
+|bwlimit\|备份迁移IO限制|200\|200M|备份迁移等功能的IO限制，单位M||默认200
+|flow_limit\|流量限制|1024\|1024GB|1024为流量大小，单位GB，填0为不限流量||默认不限流量
+|ipv4\|ip数量|1\|1个|1为ipv4的数量，单位个|√|
+|os\|操作系统|3\|centos^CentOS-8-Stream-x64|3为镜像Id 也可填镜像名称 后面是魔方显示|√|
+|sockets\|cpu插槽数|1\|1个|1为cpu插槽数，单位个|√|
+|cores\|核心数|2\|2核|2为CPU核心数，单位个|√|
+|threads\|线程数|2\|2线程|2为CPU线程数，单位个|√|
+|SystemDisk\|系统盘大小|50\|50GB|50为系统盘大小，单位GB|√|
+|cpu_mode\|cpu类型|host\|跟随主机|CPU类型如:kvm64,host,注意开启嵌套虚拟化后,此处必须填写host||默认kvm64
+|nested\|嵌套虚拟化|true\|开启嵌套虚拟化|true为开启嵌套虚拟化，反正false为关闭||默认关闭
+|kvm\|kvm虚拟化|true\|开启kvm虚拟化|true为开启kvm虚拟化，反正false为关闭||默认关闭
+|devirtualization\|去虚拟化|true\|去虚拟化|true为开启去虚拟化，反正false为关闭||默认关闭
+|cpuUnits\|cpu限制|80\|80%|80为限制CPU性能80%||
+|modelGroup\|组合模型ID|2\|模型2|2为组合模板ID||
+|vncKey\|vnc控制器名称|vnc1\|VNC控制器|指定VNC控制器,该项为后台控制器名称|√|默认0为不指定
+|nat\|是否为NAT|1\|开启NAT|1为开启NAT，0为关闭||
+
+### 固定套餐
+固定套餐直接在编辑商品-自动开通填写即可
+
+<img 
+  src="https://img.xwyue.com/i/2023/12/07/6571b9e166200.png" 
+  alt="固定套餐配置"
+  className="rounded-lg border border-fd-border"
+/>
+
+本插件会优先使用弹性配置的选项
