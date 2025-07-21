@@ -54,3 +54,4 @@ jobs:
           REMOTE_USER: ${{ secrets.USER }}
           # 部署目标目录
           TARGET: ${{ secrets.TARGET }}
+          EXCLUDE: "/node_modules/"
