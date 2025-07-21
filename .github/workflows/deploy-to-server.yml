@@ -45,7 +45,7 @@ jobs:
           # 复制操作的参数。"-avzr --delete"意味部署时清空服务器目标目录下的文件
           ARGS: "-avz --delete"
           # 源目录
-          SOURCE: "./.next"
+          SOURCE: "./"
           # 部署目标主机
           REMOTE_HOST: ${{ secrets.HOST }}
           # 部署目标主机端口
