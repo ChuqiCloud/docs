@@ -3,30 +3,20 @@ title: 更换PVE镜像源
 description: Proxmox VE 设置国内源教程
 ---
 <Callout>
-  如果你不是企业订阅用户务必删除企业订阅源，否则会造成依赖库无法正常安装等情况
+  可以直接使用我们的一键脚本
 </Callout>
 
-以下命令适合新手不知道哪个源的情况下使用，直接删除其他的源：
 ```
-rm -rf /etc/apt/sources.list.d/
+wget -qO pve_change_repo.sh https://mirror.chuqiyun.com/install/pve_change_repo.sh && chmod +x pve_change_repo.sh && ./pve_change_repo.sh
 ```
-下一步就是要更换你需要的第三方源，可以使用自带的 vi 编辑器或者 nano 编辑 `/etc/apt/sources.list`，这里推荐使用 nano，相对于该系统中的 vi 更好用：
-```
-nano /etc/apt/sources.list
-```
-可以直接使用 Back 键删除，清空内容后复制下方的国内源直接覆盖即可
 
-新手如何保存？
-
-使用 `CTRL+X 组合键` ，根据提示是否保存发送 yes 接下来会提示是否覆盖，直接按 enter 回车默认即可
-
-最后可以通过 cat /etc/apt/sources.list 验证是否更改成功
-
-7.x 版本中科大源
 ```
-deb https://mirrors.ustc.edu.cn/debian/ bullseye main contrib non-free
-deb https://mirrors.ustc.edu.cn/debian/ bullseye-updates main contrib non-free
-deb https://mirrors.ustc.edu.cn/debian/ bullseye-backports main contrib non-free
-deb https://mirrors.ustc.edu.cn/debian-security bullseye-security main contrib 
-deb https://mirrors.ustc.edu.cn/proxmox/debian bullseye pve-no-subscription
+# 换源（默认中科大）
+sudo ./pve_change_repo.sh
+
+# 换清华源
+sudo ./pve_change_repo.sh tsinghua
+
+# 一键还原
+sudo ./pve_change_repo.sh restore
 ```
