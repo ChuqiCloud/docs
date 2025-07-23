@@ -20,7 +20,25 @@ sudo wget -qO- https://get.docker.com/ | bash
 </Callout>
 
 ```
-export API_BASEURL=http://xxxxxxx && docker pull docker.cnb.cool/acmecloud/qimenidc-client:latest && docker run -d --name qimenidc-client -p 3000:3000 -e API_BASEURL=$API_BASEURL docker.cnb.cool/acmecloud/qimenidc-client:latest
+wget -qO qimenidc_client.sh https://mirror.chuqiyun.com/install/qimenidc_client.sh && chmod +x qimenidc_client.sh && ./qimenidc_client.sh
+```
+
+```
+# 安装
+./qimenidc_client.sh install
+
+# 更新
+./qimenidc_client.sh update
+
+# 卸载
+./qimenidc_client.sh uninstall
+```
+
+<Callout>
+  非交换一键脚本
+</Callout>
+```
+export API_BASEURL=http://your-api.com && wget -qO- https://mirror.chuqiyun.com/install/qimenidc_client.sh | bash -s install
 ```
 
 配置好您的域名即可使用了
