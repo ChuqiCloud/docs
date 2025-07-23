@@ -23,37 +23,4 @@ sudo wget -qO- https://get.docker.com/ | bash
 export API_BASEURL=http://xxxxxxx && docker pull docker.cnb.cool/acmecloud/qimenidc-client:latest && docker run -d --name qimenidc-client -p 3000:3000 -e API_BASEURL=$API_BASEURL docker.cnb.cool/acmecloud/qimenidc-client:latest
 ```
 
-## 手工安装
-### 服务器环境要求
-1. Nginx
-2. Node.js (版本 22 以上)
-
-### 安装 Node.js 版本管理器
-宝塔面板中点击 网站 - Node 项目 - 点击安装 - 选择安装版本 默认最新即可
-
-点击 Node 版本管理器 - 安装版本 22 以上（先点击右上角的更新版本列表）
-<img 
-  src="https://img.xwyue.com/i/2025/07/20/687c75240c776.png" 
-  alt="安装nodejs"
-  className="rounded-lg border border-fd-border"
-/>
-设置好命令行版本
-
-### 构建并部署前端
-在`/wwwroot`下新建文件夹
-<Callout>
-  前端程序运行目录可以自行选择创建
-</Callout>
-下载我们构建好的产物
-
-新建`.env`文件，填写后端地址
-```
-API_BASEURL=http://
-```
-
-### 添加 Node 项目
-新建一个 Node 项目，如下图填写 (其中目录选择你刚刚上传文件的目录)
-
-然后等待自动安装依赖即可
-将项目改为跟随系统开机启动
 配置好您的域名即可使用了
