@@ -2,6 +2,27 @@
 title: 前端安装
 description: 前端安装文档
 ---
+## Docker安装
+### 服务器环境要求
+1. Nginx
+2. Docker
+
+### 安装Docker
+1. 直接使用宝塔Docker一键安装
+2. 脚本一键安装
+```
+sudo wget -qO- https://get.docker.com/ | bash
+```
+
+### 一句话安装
+<Callout>
+  注意更换主控地址
+</Callout>
+
+```
+export API_BASEURL=http://xxxxxxx && docker pull docker.cnb.cool/acmecloud/qimenidc-client:latest && docker run -d --name qimenidc-client -p 3000:3000 -e API_BASEURL=$API_BASEURL docker.cnb.cool/acmecloud/qimenidc-client:latest
+```
+
 ## 手工安装
 ### 服务器环境要求
 1. Nginx
