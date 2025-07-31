@@ -109,6 +109,23 @@ export default function HomePage() {
             </Link>
           </div>
         </div>
+
+        {/* Footer */}
+        <footer className="border-t border-fd-border pt-8 pb-6 mt-12">
+          <div className="text-center text-sm text-fd-muted-foreground space-y-2">
+            <p>© {new Date().getFullYear()} 云上极致（深圳）互联网有限公司 版权所有</p>
+            <p>
+              <a 
+                href="https://beian.miit.gov.cn/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-fd-foreground transition-colors"
+              >
+                粤ICP备2025436238号
+              </a>
+            </p>
+          </div>
+        </footer>
       </div>
     </main>
   );
