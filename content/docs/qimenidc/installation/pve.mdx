@@ -62,20 +62,18 @@ apt remove linux-image-amd64 'linux-image-6.1*'
 apt remove os-prober
 ```
 <Callout>
-连接到管理员Web界面（https://your-ip-address:8006）。如果您是全新安装且尚未添加任何用户，则应选择PAM身份验证领域，并使用root用户帐户登录。
+连接到管理员Web界面 ( https://your-ip-address:8006/ ) 如果您是全新安装且尚未添加任何用户，则应选择PAM身份验证领域，并使用root用户帐户登录。
 </Callout>
 ## 添加存储库
 
-<Callout>如下图所示，若Debian存在多个分区，/home 分区则需要手动添加存储库</Callout>
+如下图所示，若Debian存在多个分区，/home 分区则需要手动添加存储库
 <img src="https://img.xwyue.com/i/2025/10/13/68ecab8dd2ca8.png" alt="1760340876615.png" title="1760340876615.png" />
 
-<Callout>点击：数据中心 - 存储 - 添加 - 目录，输入对应即可，内容建议勾选全部</Callout>
+点击：数据中心 - 存储 - 添加 - 目录，输入对应即可，内容建议勾选全部
 <img src="https://img.xwyue.com/i/2025/10/13/68ecac1ca12da.png" alt="1760341018734.png" title="1760341018734.png" />
 
 ## 配置网络
-<Callout>
 将网口（示例图片为eno1）eno1的IP地址删除，新建Linux Bridge 填写eno1删除的信息，桥接端口填eno1
 最后点击 应用配置 即可
-</Callout>
 <img src="https://img.xwyue.com/i/2025/10/13/68ecacb810d59.png" alt="1760341174383.png" title="1760341174383.png" />
 <img src="https://img.xwyue.com/i/2025/10/13/68ecacf53c5d0.png" alt="1760341235607.png" title="1760341235607.png" />
