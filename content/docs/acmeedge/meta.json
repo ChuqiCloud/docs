@@ -1,0 +1,11 @@
+{
+  "title": "AcmeEdge",
+  "description": "AcmeEdge 文档",
+  "icon": "CircleGauge",
+  "iconColor": "#10B981",
+  "root": true,
+  "pages": [
+    "---介绍---",
+    "index"
+  ]
+}

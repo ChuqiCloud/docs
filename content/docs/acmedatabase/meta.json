@@ -1,0 +1,11 @@
+{
+  "title": "AcmeDataBase",
+  "description": "AcmeDataBase 文档",
+  "icon": "Database",
+  "iconColor": "#7C3AED",
+  "root": true,
+  "pages": [
+    "---介绍---",
+    "index"
+  ]
+}

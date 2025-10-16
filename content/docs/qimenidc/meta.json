@@ -1,7 +1,7 @@
 {
   "title": "QimenIDC",
   "description": "QimenIDC 文档",
-  "icon": "Building",
+  "icon": "Server",
   "root": true,
   "pages": [
     "---介绍---",
@@ -14,8 +14,8 @@
     "(integrations)",
     "---常见问题---",
     "replace-mirror-source",
-    "theme",
-    "search",
+    "safe",
+    "2fa",
     "components",
     "mdx",
     "layouts"

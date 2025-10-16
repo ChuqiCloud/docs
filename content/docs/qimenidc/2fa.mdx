@@ -1,0 +1,45 @@
+---
+title: PVE Web控制面板2Fa设置
+description: Proxmox VE 控制面板2Fa设置
+---
+<Callout>
+  互联网上有非常多的扫描器 无论是善意或者恶意的 都会将我们云资产的端口内容公之于众 而PVE的Web控制面板是一个非常大的暴露口
+</Callout>
+
+接下来我们来开启2Fa安全验证
+
+## 配置TOTP
+进入PVE Web面板 按照箭头流程完成TOTP配置
+
+<img 
+  src="https://img.xwyue.com/i/2025/10/16/68f0e40e3dac2.jpg" 
+  alt="安装Jdk"
+  className="rounded-lg border border-fd-border"
+/>
+
+<img 
+  src="https://img.xwyue.com/i/2025/10/16/68f0e40e67a56.jpg" 
+  alt="安装Jdk"
+  className="rounded-lg border border-fd-border"
+/>
+
+<img 
+  src="https://img.xwyue.com/i/2025/10/16/68f0e40f0f7ba.jpg" 
+  alt="安装Jdk"
+  className="rounded-lg border border-fd-border"
+/>
+
+<img 
+  src="https://img.xwyue.com/i/2025/10/16/68f0e4123510e.jpg" 
+  alt="安装Jdk"
+  className="rounded-lg border border-fd-border"
+/>
+
+## TOTP客户端绑定
+我们通常选用Google Authenticator，UI好看而且有自动同步，当然也可以离线使用，你要用其他的也行。
+<img 
+  src="https://img.xwyue.com/i/2025/10/16/68f0e4126d407.jpg" 
+  alt="安装Jdk"
+  className="rounded-lg border border-fd-border"
+/>
+完成扫描绑定就完成了

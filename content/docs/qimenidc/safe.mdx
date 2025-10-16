@@ -1,0 +1,121 @@
+---
+title: PVE宿主机安全加固
+description: Proxmox VE 宿主机安全加固
+---
+<Callout>
+  很多宿主机被入侵导致挖矿、跑pcdn、发包、入侵/删除客户服务器的悲惨事故都源自SSH被爆破或其他方法侵入服务器
+</Callout>
+
+> 很多服务商对宿主机的安全防范意识弱，故此建议服务商们尽早完成宿主机的安全加固，而不是事后的反思和赔偿，将风险扼杀于摇篮之中，对自己与客户负责
+
+接下来我们开始将SSH改为仅允许`密钥连接` 同时保留DCIM使用密码正常操作
+
+## 1 生成密钥对（客户端操作）
+### 1.1 Windows 10/11（自带 OpenSSH）
+1. 按 `Win + X` → **终端(管理员)** 或 **PowerShell**  
+2. 生成 ED25519 密钥  
+   ```powershell
+   ssh-keygen -t ed25519 -C "pve-$(whoami)"
+   ```
+   一路回车（默认保存在 `C:\Users\你的用户名\.ssh\id_ed25519`）  
+   **可选**：第一次提示时输入 **Key-Passphrase**（本地私钥密码，可空）  
+3. 查看公钥内容，稍后要用：  
+   ```powershell
+   type $HOME\.ssh\id_ed25519.pub
+   ```
+   会输出 `ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI... 注释`
+
+### 1.2 macOS / Linux
+```bash
+ssh-keygen -t ed25519 -C "pve-$(whoami)"
+# 保存路径默认 ~/.ssh/id_ed25519
+cat ~/.ssh/id_ed25519.pub
+```
+
+## 2 把公钥灌进 PVE 主机
+### 方法 A：一键拷贝（最简）
+```bash
+ssh-copy-id -i ~/.ssh/id_ed25519.pub root@<IP 和主机名都可以>
+# 首次还要输入 root 密码，完成后会自动把公钥追加到
+# /root/.ssh/authorized_keys
+```
+
+### 方法 B：手动拷贝（Windows 没装 ssh-copy-id 时）
+1. 先密码登录  
+   ```bash
+   ssh root@<IP 和主机名都可以>
+   ```
+2. 在 PVE 上执行  
+   ```bash
+   mkdir -p /root/.ssh
+   chmod 700 /root/.ssh
+   # 把刚才打印的公钥整行粘进去（含 ssh-ed25519 开头）
+   nano /root/.ssh/authorized_keys      # 粘贴后 Ctrl+O 保存，Ctrl+X 退出
+   chmod 600 /root/.ssh/authorized_keys
+   ```
+3. 退出 `exit`
+
+## 3 验证密钥已生效
+### 3.1 基本验证
+```bash
+ssh -i ~/.ssh/id_ed25519 root@<IP 和主机名都可以>
+```
+应**不再提示密码**直接进系统。  
+如果还提示，看 3.2 排错。
+
+### 3.2 排错速查
+| 现象 | 解决 |
+|------|------|
+| 仍要输入密码 | 1. 公钥没整行复制完整<br />2. `/root/.ssh` 权限不是 700<br />3. `authorized_keys` 权限不是 600 |
+| Permission denied (publickey) | 1. 对应私钥不在 `~/.ssh/id_ed25519`<br />2. 用 `-i` 指定路径<br />3. 确认 PVE 的 `/etc/ssh/sshd_config` 里 `PubkeyAuthentication yes` |
+
+### 3.3 确认密码再也连不上（远程）
+```bash
+ssh -o PreferredAuthentications=password root@<IP 和主机名都可以>
+```
+期望输出：  
+```
+Permission denied (publickey).
+```
+说明密码通道已被 `sshd_config` 关闭，密钥是唯一入口。
+
+## 4 关闭 SSH 密码登录（仅密钥）
+在 **PVE 宿主机**里执行：
+
+```bash
+# 1. 禁止密码认证
+sed -i 's/^#\?PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd_config
+sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
+
+# 2. 生效
+systemctl restart sshd
+```
+
+## 5 导出/备份私钥（可选）
+- **Windows**：  
+  复制 `C:\Users\用户名\.ssh\id_ed25519` 到加密 U 盘或密码管理器。  
+- **macOS / Linux**：  
+  ```bash
+  cp ~/.ssh/id_ed25519 /mnt/加密盘/pve-ed25519.key
+  chmod 400 /mnt/加密盘/pve-ed25519.key
+  ```
+
+## 6 最终验证
+```bash
+# 客户端再试密码通道，应被拒绝
+ssh -o PreferredAuthentications=password root@<IP 和主机名都可以>
+# 期望：Permission denied (publickey).
+```
+密钥通道仍正常：
+```bash
+ssh -i ~/.ssh/id_ed25519 root@<IP 和主机名都可以>
+```
+直接登录 → 加固完成。
+
+## 7 小结
+1. 本地生成：`ssh-keygen -t ed25519`  
+2. 上传公钥：`ssh-copy-id` 或手动粘到 `/root/.ssh/authorized_keys`  
+3. 权限必须：  
+   - `.ssh` 目录 700  
+   - `authorized_keys` 600  
+4. 验证：密钥能进、密码被拒 → 再继续「关闭 SSH 密码」步骤。

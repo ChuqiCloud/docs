@@ -1,0 +1,11 @@
+{
+  "title": "AcmeCOS",
+  "description": "AcmeCOS 文档",
+  "icon": "FileBox",
+  "iconColor": "#0EA5E9",
+  "root": true,
+  "pages": [
+    "---介绍---",
+    "index"
+  ]
+}

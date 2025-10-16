@@ -18,13 +18,13 @@ export const source = loader({
       // 为不同图标设置不同颜色
       const getIconColor = (iconName: string) => {
         switch (iconName) {
-          case 'Building':
-            return 'text-blue-600 dark:text-blue-400';
           case 'Server':
+            return 'text-blue-600 dark:text-blue-400';
+          case 'FileBox':
             return 'text-green-600 dark:text-green-400';
-          case 'Code':
+          case 'CircleGauge':
             return 'text-purple-600 dark:text-purple-400';
-          case 'Settings':
+          case 'Database':
             return 'text-orange-600 dark:text-orange-400';
           default:
             return 'text-gray-600 dark:text-gray-400';
