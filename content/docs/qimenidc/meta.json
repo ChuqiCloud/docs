@@ -9,15 +9,13 @@
     "what-is-qimenidc",
     "comparisons",
     "---安装---",
-    "(installation)",
-    "...",
-    "(integrations)",
+    "installation",
+    "integrations",
+    "---功能介绍---",
+    "features",
     "---常见问题---",
     "replace-mirror-source",
     "safe",
-    "2fa",
-    "components",
-    "mdx",
-    "layouts"
+    "2fa"
   ]
 }

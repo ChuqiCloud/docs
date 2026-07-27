@@ -1,0 +1,12 @@
+{
+  "title": "功能介绍",
+  "pages": [
+    "instances",
+    "nodes",
+    "ip-pools",
+    "os-management",
+    "vm-init-scripts",
+    "settings"
+  ],
+  "defaultOpen": true
+}

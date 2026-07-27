@@ -1,11 +1,23 @@
 import '@/app/global.css';
-import { RootProvider } from 'fumadocs-ui/provider';
-import { Inter } from 'next/font/google';
+import { RootProvider } from 'fumadocs-ui/provider/next';
 import Script from 'next/script';
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 
-const inter = Inter({ subsets: ['latin'] });
+// 兼容 Node 25 中可能存在但不完整的服务端 localStorage。
+if (typeof window === 'undefined' && typeof globalThis.localStorage?.getItem !== 'function') {
+  Object.defineProperty(globalThis, 'localStorage', {
+    configurable: true,
+    value: {
+      length: 0,
+      clear: () => undefined,
+      getItem: () => null,
+      key: () => null,
+      removeItem: () => undefined,
+      setItem: () => undefined,
+    } satisfies Storage,
+  });
+}
 
 // 1. 全站默认 SEO + 图标
 export const metadata: Metadata = {
@@ -31,7 +43,7 @@ export const metadata: Metadata = {
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={inter.className} suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head />
       <body className="flex flex-col min-h-screen">
         {/* 统计脚本 */}
