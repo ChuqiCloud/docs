@@ -14,7 +14,7 @@ description: 前端安装文档
 sudo wget -qO- https://get.docker.com/ | bash
 ```
 
-### 一句话安装
+### 安装前端
 <Callout>
   注意更换主控地址
 </Callout>
@@ -40,5 +40,20 @@ wget -qO qimenidc_client.sh https://mirror.chuqiyun.com/install/qimenidc_client.
 ```
 export API_BASEURL=http://your-api.com && wget -qO- https://mirror.chuqiyun.com/install/qimenidc_client.sh | bash -s install
 ```
+#### 安装交互
+```
+1. API_BASEURL：例如 http://公网IP:8080 
+2. NEXT_PUBLIC_Auth_Key：高级功能密钥，具体费用需要联系商务，直接回车跳过
+3. ADMIN_PATH：可选，默认admin，使用默认配置直接回车留空
+4. 宿主机端口：默认 3000，直接回车使用默认值，前端的访问端口
+```
 
-配置好您的域名即可使用了
+## 安全加固【必做】
+<Callout>
+  配置好您的域名，申请SSL证书，反代前端接口，实现SSL安全加固。建议前端完成SSL证书配置，否则样式可能加载失败
+</Callout>
+<img 
+  src="https://img.xwyue.com/v/2026/07/27/6a67110c73c52.png" 
+  alt="反向代理"
+  className="rounded-lg border border-fd-border"
+/>

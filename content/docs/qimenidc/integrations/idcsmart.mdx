@@ -52,7 +52,14 @@ QimenIDC插件拥有两种配置模式，可以弹性配置和固定套餐
 |cpuUnits\|cpu限制|80\|80%|80为限制CPU性能80%||
 |modelGroup\|组合模型ID|2\|模型2|2为组合模板ID||
 |vncKey\|vnc控制器名称|vnc1\|VNC控制器|指定VNC控制器,该项为后台控制器名称|√|默认0为不指定
-|nat\|是否为NAT|1\|开启NAT|1为开启NAT，0为关闭||
+|ifnat\|是否为NAT|1\|开启NAT|1为开启NAT，0为关闭||
+|natnum\|NAT端口数量|5\|5个|NAT端口数量||
+|resetFlowTime\|流量重置时间|0\|开通日|0表示开通日重置流量，1表示每月1号||
+|outFlow\|超出流量操作|0\|暂停虚拟机|0为暂停虚拟机，1024为限速1024 单位kb||
+|backup_num\|备份数量|1\|1个|备份数量，单位个||
+|snap_num\|快照数量|1\|1个|备份数量，单位个||
+|networkType\|网络类型|classic\|经典网络|虚拟机网络类型 classic和vpc，vpc需要创建一个SDN网络||
+|vpcSubnetId\|VPC子网ID|1\|ID1|SDN网络子网ID，可以留空，留空系统自动选择||
 
 ### 固定套餐
 固定套餐直接在编辑商品-自动开通填写即可
