@@ -1,0 +1,13 @@
+{
+  "title": "CqCloud",
+  "description": "CqCloud 文档",
+  "icon": "Cloud",
+  "iconColor": "#0284C7",
+  "root": true,
+  "pagesIndex": "[CqCloud](/docs/cqcloud/cloud-server/product-overview)",
+  "pages": [
+    "cloud-server",
+    "physical-server",
+    "operations"
+  ]
+}

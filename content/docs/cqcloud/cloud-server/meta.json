@@ -1,0 +1,13 @@
+{
+  "title": "云服务器",
+  "pages": [
+    "product-overview",
+    "regions-and-availability-zones",
+    "network-and-test-ip",
+    "bandwidth-billing",
+    "domain-whitelist",
+    "icp-filing",
+    "refund-policy"
+  ],
+  "defaultOpen": true
+}

@@ -1,3 +1,36 @@
 @import 'tailwindcss';
 @import 'fumadocs-ui/css/vitepress.css';
 @import 'fumadocs-ui/css/preset.css';
+
+.region-node-table {
+  width: fit-content;
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--color-fd-border);
+  border-radius: 8px;
+}
+
+.region-node-table > table {
+  width: max-content;
+  min-width: 100%;
+  margin: 0 !important;
+  border: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.region-node-table th,
+.region-node-table td {
+  border: 0;
+  vertical-align: middle;
+  border-inline-end: 1px solid var(--color-fd-border);
+  border-block-end: 1px solid var(--color-fd-border);
+}
+
+.region-node-table tr > :last-child {
+  border-inline-end: 0;
+}
+
+.region-node-table tbody tr:last-child > * {
+  border-block-end: 0;
+}
