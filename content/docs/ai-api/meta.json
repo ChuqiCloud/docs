@@ -1,0 +1,19 @@
+{
+  "title": "AI API",
+  "description": "AI API 文档",
+  "icon": "Bot",
+  "iconColor": "#06B6D4",
+  "root": true,
+  "pages": [
+    "---快速上手---",
+    "index",
+    "recharge-subscribe",
+    "create-api-key",
+    "---第三步---",
+    "client-config",
+    "---常见问题---",
+    "faq",
+    "---获取帮助---",
+    "support"
+  ]
+}

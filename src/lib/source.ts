@@ -26,6 +26,8 @@ export const source = loader({
             return 'text-purple-600 dark:text-purple-400';
           case 'Database':
             return 'text-orange-600 dark:text-orange-400';
+          case 'Bot':
+            return 'text-cyan-600 dark:text-cyan-400';
           default:
             return 'text-gray-600 dark:text-gray-400';
         }

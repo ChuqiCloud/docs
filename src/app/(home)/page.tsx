@@ -52,7 +52,7 @@ const productLinks = [
 const quickLinks = [
   { title: '安装 QimenIDC', href: '/docs/qimenidc/installation', icon: TerminalSquare },
   { title: '了解 QimenIDC', href: '/docs/qimenidc/what-is-qimenidc', icon: BookOpen },
-  { title: '集成方案', href: '/docs/qimenidc/integrations', icon: Boxes },
+  { title: '魔方财务', href: '/docs/qimenidc/integrations/idcsmart', icon: Boxes },
   { title: '产品对比', href: '/docs/qimenidc/comparisons', icon: CheckCircle2 },
 ];
 
@@ -83,17 +83,17 @@ export default function HomePage() {
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
-                href="/docs"
+                href="/docs/qimenidc/installation"
                 className="inline-flex h-11 items-center justify-center gap-2 rounded-md bg-blue-600 px-5 text-sm font-medium text-white transition-colors hover:bg-blue-700"
               >
-                浏览全部文档
+                查看安装指南
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
-                href="/docs/qimenidc/installation"
+                href="/docs/qimenidc/integrations/idcsmart"
                 className="inline-flex h-11 items-center justify-center gap-2 rounded-md border border-fd-border bg-fd-card px-5 text-sm font-medium text-fd-foreground transition-colors hover:bg-fd-muted"
               >
-                查看安装指南
+                魔方财务对接
               </Link>
             </div>
           </div>
@@ -138,10 +138,6 @@ export default function HomePage() {
             <h2 className="text-2xl font-semibold text-fd-foreground">产品文档</h2>
             <p className="mt-2 text-sm text-fd-muted-foreground">按产品进入对应手册，快速定位入门、配置和最佳实践。</p>
           </div>
-          <Link href="/docs" className="inline-flex items-center gap-2 text-sm font-medium text-blue-500 hover:text-blue-600">
-            全部目录
-            <ArrowRight className="h-4 w-4" />
-          </Link>
         </div>
 
         <div className="grid gap-4 md:grid-cols-2">
@@ -216,7 +212,7 @@ export default function HomePage() {
       </section>
 
       <footer className="mx-auto w-full max-w-6xl px-6 py-8 lg:px-8">
-        <div className="flex flex-col justify-between gap-3 border-t border-fd-border pt-6 text-sm text-fd-muted-foreground sm:flex-row">
+        <div className="flex flex-col justify-between gap-3 text-sm text-fd-muted-foreground sm:flex-row">
           <p>© {new Date().getFullYear()} 云上极致（深圳）互联网有限公司 版权所有</p>
           <a
             href="https://beian.miit.gov.cn/"

@@ -1,0 +1,9 @@
+{
+  "title": "客户端中使用",
+  "pages": [
+    "client-selection",
+    "basic-parameters",
+    "cc-switch"
+  ],
+  "defaultOpen": true
+}

@@ -1,0 +1,48 @@
+---
+title: 3.1 AI 客户端选择
+description: 选择适合的 AI API 调用客户端
+---
+
+# 3.1 AI 客户端选择
+
+创建 API Key 后，需要在 Claude Code、Codex、CC-Switch 等客户端中填写连接参数。
+
+AI 服务通常有两类使用方式：网页端对话与 Agent 客户端。网页端通常仅提供对话和联网搜索，无法覆盖 Skill、MCP、工具调用等能力；Agent 客户端可满足更广泛的使用场景，建议初学者优先学习使用。
+
+## Agent 客户端类型
+
+### CLI
+
+例如 Claude Code CLI。CLI 仅提供核心功能，直接在命令行环境中使用；也可通过 UI 插件集成至 VS Code、PyCharm 等编程 IDE。该方式更适合具备命令行经验的用户。
+
+### Desktop
+
+桌面客户端通常由官方或第三方提供，集成 CLI 功能及其他能力，更适合入门用户。常见客户端包括 Claude Code、Codex 和 Cherry Studio。
+
+- 使用 GPT 模型时，推荐使用 Codex。
+- 使用 Claude 模型时，推荐使用 Claude Code。
+- 不建议在 Claude Code 中使用 GPT 模型，非 Claude 系列模型可能受到额外兼容性限制。
+
+## 客户端下载
+
+- [Claude Code](https://claude.ai/login)
+- [Codex](https://openai.com/zh-Hans-CN/codex/)
+
+## 按场景选择客户端
+
+|使用场景|推荐组合|
+|---|---|
+|编程|Claude Code 或 Codex 均可。追求性能时可选择 Claude Code + Claude；关注性价比时可选择 Codex + GPT。|
+|日常文档处理、文案写作|Codex + GPT|
+|行业研究、深度分析|Claude Code + Claude|
+
+## 说明
+
+以上推荐基于不同模型的常见能力特点，实际选择请结合个人偏好与使用习惯。
+
+- Claude 类模型通常更擅长深度思考、推理和复杂任务拆解，适合追求高质量方案的场景。
+- GPT 类模型具备较强的推理与综合能力，适合需要兼顾完成度与覆盖面的场景。
+
+完成客户端安装后，可按照后续流程将客户端接口配置为本站 API，以调用本站提供的模型。
+
+初次使用时，建议通过 CC-Switch 完成“上游官方 → 中转站 → CCS → 客户端”的配置。
