@@ -20,6 +20,10 @@ export const source = loader({
         switch (iconName) {
           case 'Server':
             return 'text-blue-600 dark:text-blue-400';
+          case 'ServerCog':
+            return 'text-blue-600 dark:text-blue-400';
+          case 'ServerCrash':
+            return 'text-sky-600 dark:text-sky-400';
           case 'FileBox':
             return 'text-green-600 dark:text-green-400';
           case 'CircleGauge':
@@ -28,6 +32,10 @@ export const source = loader({
             return 'text-orange-600 dark:text-orange-400';
           case 'Bot':
             return 'text-cyan-600 dark:text-cyan-400';
+          case 'Cloud':
+            return 'text-sky-600 dark:text-sky-400';
+          case 'CloudCog':
+            return 'text-sky-600 dark:text-sky-400';
           default:
             return 'text-gray-600 dark:text-gray-400';
         }

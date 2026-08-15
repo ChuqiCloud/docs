@@ -1,7 +1,7 @@
 {
-  "title": "基础运维实践",
+  "title": "操作指南",
   "pages": [
-    "index"
+    "connect-linux"
   ],
-  "defaultOpen": false
+  "defaultOpen": true
 }

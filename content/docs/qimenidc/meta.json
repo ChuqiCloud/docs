@@ -1,7 +1,7 @@
 {
   "title": "QimenIDC",
   "description": "QimenIDC 文档",
-  "icon": "Server",
+  "icon": "ServerCog",
   "root": true,
   "pages": [
     "---介绍---",

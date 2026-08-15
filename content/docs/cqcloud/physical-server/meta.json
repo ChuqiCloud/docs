@@ -2,6 +2,7 @@
   "title": "物理服务器",
   "pages": [
     "index",
+    "regions-and-availability-zones",
     "refund-policy"
   ],
   "defaultOpen": false

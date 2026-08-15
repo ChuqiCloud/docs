@@ -1,0 +1,362 @@
+---
+title: 使用 OpenSSH 或 Xshell 连接 Linux 实例
+description: 通过 OpenSSH 或 Xshell 远程连接 CqCloud Linux 实例
+---
+
+当本地设备为 macOS 或 Windows 10/11，可直接使用系统内置的 OpenSSH 命令行工具连接 Linux 实例。此外，本地 Windows 设备也可以通过 Xshell 工具连接实例，两种方式均支持密码或密钥对认证。
+
+## 方式一：使用 OpenSSH 客户端（命令行）
+
+OpenSSH 是 macOS 和新版 Windows 系统内置的标准 SSH 客户端，通过命令行即可快速连接。
+
+### 操作步骤
+
+<Tabs items={["Windows 10/11", "macOS"]}>
+  <Tab value="Windows 10/11">
+    <Tabs items={["密码登录", "密钥对登录"]}>
+      <Tab value="密码登录">
+        <Steps>
+          <Step>
+            ### 打开 PowerShell
+
+            按 `Win` + `R` 输入 `powershell` 后按 `Enter` 键进入 PowerShell 命令行界面。
+          </Step>
+
+          <Step>
+            ### 发起远程连接
+
+            ```powershell
+            ssh <实例登录名>@<实例公网IP地址>
+            ```
+
+            <Callout type="info">
+              示例：`ssh root@47.98.xxx.xxx`
+            </Callout>
+          </Step>
+
+          <Step>
+            ### （首次连接时）验证主机指纹
+
+            当首次连接一台新的 ECS 时，会显示类似下方的信息，提示验证主机密钥指纹。
+
+            <Callout type="warn">
+              这是 SSH 的一项安全机制，为确保安全，请获取服务器的主机密钥指纹后比对差异。若不一致，则说明正在遭受中间人攻击，请切换到安全的网络环境下重新连接实例。
+            </Callout>
+
+            确认主机指纹无误后，输入 `yes` 并按回车。
+
+            ```powershell
+            The authenticity of host '47.98.xxx.xxx (47.98.xxx.xxx)' can't be established.
+            ED25519 key fingerprint is SHA256:AbCdEf123456...
+            This key is not known by any other names.
+            Are you sure you want to continue connecting (yes/no/[fingerprint])?
+            ```
+          </Step>
+
+          <Step>
+            ### 输入密码，进入实例
+
+            <Callout type="info">
+              输入密码时屏幕不会显示字符，这是正常现象，输入完成后按回车即可。
+            </Callout>
+
+            密码验证通过后，将看到类似下方的欢迎信息，并且命令提示符会变为 `[<实例登录名>@<hostname> ~]$` 的形式。表示已成功登录到 ECS 实例。
+
+            ```powershell
+            Welcome to svyun.com Elastic Compute Service !
+
+            [root@Connect-Instance-Example ~]#
+            ```
+          </Step>
+        </Steps>
+      </Tab>
+
+      <Tab value="密钥对登录">
+        <Steps>
+          <Step>
+            ### 打开 PowerShell
+
+            按 `Win` + `R` 输入 `powershell` 后按 `Enter` 键进入 PowerShell 命令行界面。
+          </Step>
+
+          <Step>
+            ### 发起远程连接
+
+            ```powershell
+            ssh -i /path/to/private_key.pem <实例登录名>@<实例公网IP地址>
+            ```
+
+            <Callout type="info">
+              示例：`ssh -i /path/to/private_key.pem root@47.98.xxx.xxx`。其中 `/path/to/private_key.pem` 为私钥文件路径，例如 `C:\Users\Administrator\Downloads\private_key.pem`。
+            </Callout>
+          </Step>
+
+          <Step>
+            ### （首次连接时）验证主机指纹
+
+            当首次连接一台新的 ECS 时，会显示类似下方的信息，提示验证主机密钥指纹。
+
+            <Callout type="warn">
+              这是 SSH 的一项安全机制，为确保安全，请获取服务器的主机密钥指纹后比对差异。若不一致，则说明正在遭受中间人攻击，请切换到安全的网络环境下重新连接实例。
+            </Callout>
+
+            确认主机指纹无误后，输入 `yes` 并按回车。
+
+            ```powershell
+            The authenticity of host '47.98.xxx.xxx (47.98.xxx.xxx)' can't be established.
+            ED25519 key fingerprint is SHA256:AbCdEf123456...
+            This key is not known by any other names.
+            Are you sure you want to continue connecting (yes/no/[fingerprint])?
+            ```
+          </Step>
+
+          <Step>
+            ### 验证密钥，进入实例
+
+            当密钥验证通过后，将看到类似下方的欢迎信息，并且命令提示符会变为 `[<实例登录名>@<hostname> ~]$` 的形式。表示已成功登录到 ECS 实例。
+
+            ```powershell
+            Welcome to svyun.com Elastic Compute Service !
+
+            [root@Connect-Instance-Example ~]#
+            ```
+          </Step>
+        </Steps>
+      </Tab>
+    </Tabs>
+  </Tab>
+
+  <Tab value="macOS">
+    <Tabs items={["密码登录", "密钥对登录"]}>
+      <Tab value="密码登录">
+        <Steps>
+          <Step>
+            ### 打开终端（Terminal）
+          </Step>
+
+          <Step>
+            ### 发起远程连接
+
+            ```bash
+            ssh <实例登录名>@<实例公网IP地址>
+            ```
+
+            <Callout type="info">
+              示例：`ssh root@47.98.xxx.xxx`
+            </Callout>
+          </Step>
+
+          <Step>
+            ### （首次连接时）验证主机指纹
+
+            当首次连接一台新的 ECS 时，会显示类似下方的信息，提示验证主机密钥指纹。
+
+            <Callout type="warn">
+              这是 SSH 的一项安全机制，为确保安全，请获取实例的主机密钥指纹后比对差异。若不一致，则说明正在遭受中间人攻击，请切换到安全的网络环境下重新连接实例。
+            </Callout>
+
+            确认主机指纹无误后，输入 `yes` 并按回车。
+
+            ```powershell
+            The authenticity of host '47.98.xxx.xxx (47.98.xxx.xxx)' can't be established.
+            ED25519 key fingerprint is SHA256:AbCdEf123456...
+            This key is not known by any other names.
+            Are you sure you want to continue connecting (yes/no/[fingerprint])?
+            ```
+          </Step>
+
+          <Step>
+            ### 输入密码，进入实例
+
+            <Callout type="info">
+              输入密码时屏幕不会显示字符，这是正常现象，输入完成后按回车即可。
+            </Callout>
+
+            密码验证通过后，将看到系统的登录欢迎信息（具体内容因操作系统镜像而异），并且命令提示符会变为 `[<实例登录名>@<hostname> ~]$` 的形式。表示已成功登录到 ECS 实例。
+
+            ```powershell
+            Welcome to svyun.com Elastic Compute Service !
+
+            [root@Connect-Instance-Example ~]#
+            ```
+          </Step>
+        </Steps>
+      </Tab>
+
+      <Tab value="密钥对登录">
+        <Steps>
+          <Step>
+            ### 打开终端（Terminal）
+          </Step>
+
+          <Step>
+            ### 发起远程连接
+
+            ```bash
+            # chmod 400: 为私钥文件设置仅所有者可读的权限，这是 SSH 客户端的安全要求
+            chmod 400 /path/to/private_key.pem
+            ssh -i /path/to/private_key.pem <实例登录名>@<实例公网IP地址>
+            ```
+
+            <Callout type="info">
+              示例：`ssh -i /path/to/private_key.pem root@47.98.xxx.xxx`。其中 `/path/to/private_key.pem` 为私钥文件路径。
+            </Callout>
+          </Step>
+
+          <Step>
+            ### （首次连接时）验证主机指纹
+
+            当首次连接一台新的 ECS 时，会显示类似下方的信息，提示验证主机密钥指纹。
+
+            <Callout type="warn">
+              这是 SSH 的一项安全机制，为确保安全，请获取实例的主机密钥指纹后比对差异。若不一致，则说明正在遭受中间人攻击，请切换到安全的网络环境下重新连接实例。
+            </Callout>
+
+            确认主机指纹无误后，输入 `yes` 并按回车。
+
+            ```powershell
+            The authenticity of host '47.98.xxx.xxx (47.98.xxx.xxx)' can't be established.
+            ED25519 key fingerprint is SHA256:AbCdEf123456...
+            This key is not known by any other names.
+            Are you sure you want to continue connecting (yes/no/[fingerprint])?
+            ```
+          </Step>
+
+          <Step>
+            ### 验证密钥，进入实例
+
+            当密钥验证通过后，将看到类似下方的欢迎信息，并且命令提示符会变为 `[<username>@<hostname> ~]$` 的形式。表示已成功登录到 ECS 实例。
+
+            ```powershell
+            Welcome to svyun.com Elastic Compute Service !
+
+            [root@Connect-Instance-Example ~]#
+            ```
+          </Step>
+        </Steps>
+      </Tab>
+    </Tabs>
+  </Tab>
+</Tabs>
+
+## 方式二：使用 Xshell 客户端（仅适用于 Windows）
+
+Xshell 是一款 SSH 客户端工具，用于在 Windows 系统远程登录和管理 Linux 服务器。
+
+### 操作步骤
+
+<Steps>
+  <Step>
+    ### 启动 Xshell 并新建会话
+
+    1. 打开 Xshell 应用程序。
+    2. 在弹出的**会话**窗口中，单击**新建**（或通过菜单栏**文件** > **新建**）。
+  </Step>
+
+  <Step>
+    ### 配置连接基本信息
+
+    单击左侧导航栏下的**连接**，完成配置：
+
+    - **主机**：输入实例的公网 IP 地址。
+    - **端口号**：默认为 `22`。
+    - **协议**：选择 `SSH`。
+  </Step>
+
+  <Step>
+    ### 配置用户身份验证
+
+    在左侧导航栏中，单击**用户身份验证**。
+
+    <Tabs items={["密码登录", "密钥对登录"]}>
+      <Tab value="密码登录">
+        1. **方法**：选择 **Password**。
+        2. **用户名**：输入服务器的登录名（如 `root`）。
+        3. **密码**：输入对应的登录密码。
+      </Tab>
+
+      <Tab value="密钥对登录">
+        1. **用户名**：输入服务器的登录名（如 `root`）。
+        2. **方法**：选择 **Public Key**，并按以下步骤配置用户密钥：
+           - 单击**设置...**。
+           - 在弹出的窗口中，选择**密钥文件**选项，单击**用户密钥**配置项后的 **...**，单击**导入...**，选择本地存储的 `.pem` 后缀私钥文件。
+           - 导入成功后，选中该密钥，单击**确定**。
+        3. （可选）如密钥文件设置了密码，则需要提供**密码**。
+      </Tab>
+    </Tabs>
+  </Step>
+
+  <Step>
+    ### 连接到服务器
+
+    完成上述配置后，单击**连接**。
+  </Step>
+
+  <Step>
+    ### （首次连接时）验证主机密钥
+
+    当首次连接一台新的 ECS 时，Xshell 会弹出 **SSH 安全警告** 窗口，显示主机密钥指纹。
+
+    <Callout type="warn">
+      这是 SSH 的一项安全机制，为确保安全，请获取实例的主机密钥指纹后比对差异。若不一致，则说明正在遭受中间人攻击，请切换到安全的网络环境下重新连接实例。
+    </Callout>
+
+    确认无误后，单击**接受并保存**，这样以后连接就不会再弹出此提示。
+  </Step>
+
+  <Step>
+    ### 连接成功
+
+    当看到命令提示符出现以下内容时，表示已经通过验证，成功连接。
+
+    ```bash
+    Welcome to svyun.com Elastic Compute Service !
+
+    [root@Connect-Instance-Example ~]#
+    ```
+  </Step>
+</Steps>
+
+## 应用于生产环境
+
+在实际生产环境中，建议通过以下操作提升远程连接安全。
+
+### 主动验证主机指纹，防范中间人攻击
+
+在第一次连接到实例时，应先验证实例的主机密钥指纹，确认连接的是目标实例而非攻击者的服务器。
+
+### 禁用密码登录，强制使用密钥对
+
+密钥对认证远比密码认证安全，可降低暴力破解风险。操作如下：
+
+<Steps>
+  <Step>
+    为实例绑定密钥对。
+  </Step>
+
+  <Step>
+    禁用密码登录：登录实例，编辑 `/etc/ssh/sshd_config` 配置文件，找到 `PasswordAuthentication`，修改为 `PasswordAuthentication no`，重启 SSH 服务生效配置。
+  </Step>
+</Steps>
+
+### 修改默认 SSH 端口
+
+将默认 22 端口改为其他数值较大的非标准端口（如 `2222`），可有效减少被恶意扫描。
+
+<Steps>
+  <Step>
+    **放行新端口**：在实例所属的安全组中添加入方向规则，放行新的端口（如 `2222`）。
+  </Step>
+
+  <Step>
+    **修改 SSH 服务端口**：登录实例，编辑 `/etc/ssh/sshd_config` 配置文件，将 `#Port 22` 修改为 `Port 2222`。重启 SSH 服务生效配置。
+  </Step>
+
+  <Step>
+    **使用新端口连接**：此后使用 `ssh` 命令时，需通过 `-p` 指定 SSH 的服务端口，例如：`ssh -p 2222 username@instance_ip`。
+  </Step>
+</Steps>
+
+### 仅授权可信的 IP 访问实例
+
+修改安全组规则，仅允许本机 IP 或其他受信任的 IP 访问实例 SSH 服务，拦截未知主机访问实例。
