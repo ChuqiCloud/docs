@@ -1,0 +1,68 @@
+---
+title: 3.3 安装 Claude Desktop
+description: 安装 Claude 桌面客户端并接入本站 API
+---
+
+# 3.3 安装 Claude Desktop
+
+Claude 桌面端（在 CC-Switch 中显示为 Claude Desktop）提供图形界面，内置 Claude Code 能力，无需单独安装 Node.js 或 CLI，适合不熟悉命令行的用户。
+
+{/* 图片位置：Claude 桌面端主界面 */}
+{/* <img src="" alt="Claude 桌面端主界面" className="border border-fd-border" /> */}
+
+## 系统要求
+
+|系统|说明|
+|---|---|
+|macOS|通用安装包，支持 Intel 与 Apple 芯片|
+|Windows|x64 安装包，ARM64 设备需下载 ARM64 版本|
+|Linux|Beta 阶段，Ubuntu / Debian 通过 apt 或 `.deb` 安装|
+
+## 安装步骤
+
+1. 打开 [Claude 下载页面](https://claude.com/download)，选择与系统匹配的安装包。
+
+{/* 图片位置：下载页面选择安装包 */}
+{/* <img src="" alt="选择安装包" className="border border-fd-border" /> */}
+
+2. 下载完成后运行安装程序：
+
+- Windows：双击安装包，按提示完成安装。
+- macOS：打开 `.dmg` 文件，将应用拖入「应用程序」文件夹。
+- Linux：按官方说明使用 apt 或 `.deb` 安装。
+
+3. 启动应用，等待初始化完成。
+
+{/* 图片位置：首次启动界面 */}
+{/* <img src="" alt="首次启动" className="border border-fd-border" /> */}
+
+## 界面说明
+
+桌面端顶部有三个标签页，接入本站 API 后主要使用 **Code** 标签页：
+
+|标签页|说明|
+|---|---|
+|Chat|普通对话，不访问本地文件|
+|Cowork|在沙箱环境中后台自主执行任务|
+|Code|交互式编程助手，可直接读写本地文件|
+
+## 接入本站 API
+
+桌面端使用本站 API Key 调用模型，配置由 CC-Switch 写入（3P profile）。桌面端不支持本站的一键导入，需要在 CC-Switch 的 Claude Desktop 面板中手动添加供应商，具体步骤见 [Claude Desktop 的手动配置](/docs/ai-api/client-config/cc-switch#claude-desktop-的手动配置)。
+
+<Callout type="warning">
+  桌面端与 [Claude Code CLI](/docs/ai-api/client-config/install-claude-cli) 是两个独立的客户端，配置分开存放：CLI 使用 `~/.claude/settings.json`，桌面端使用自己的 3P profile。即使已经为 CLI 配置好本站 API，桌面端仍需单独配置一次。
+</Callout>
+
+<Callout>
+  通过 CC-Switch 接入目前仅支持 macOS 与 Windows，Linux 暂不支持写入 3P 配置。
+</Callout>
+
+## 常见问题
+
+|现象|处理方式|
+|---|---|
+|安装包无法下载|检查网络是否可访问下载站点，或更换网络环境重试。|
+|点击 Code 标签页提示升级订阅|本站供应商尚未生效，先在 CC-Switch 中完成配置并启用，然后完全退出并重启应用。|
+|切换供应商后没有变化|桌面端不会热重载配置，需完全退出应用再重新打开。|
+|Windows 本地会话无法启动|本地会话需要已安装 Git，安装 [Git for Windows](https://git-scm.com/downloads/win) 后重试。|

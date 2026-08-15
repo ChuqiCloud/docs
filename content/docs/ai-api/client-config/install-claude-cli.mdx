@@ -1,0 +1,135 @@
+---
+title: 3.4 安装 Claude Code CLI
+description: 在命令行环境中安装 Claude Code CLI
+---
+
+# 3.4 安装 Claude Code CLI
+
+Claude Code CLI 在终端中运行，适合有命令行使用经验的用户，也可作为 VS Code、JetBrains 系列 IDE 插件的底层依赖。
+
+{/* 图片位置：终端中运行 claude 的界面 */}
+{/* <img src="" alt="Claude Code CLI 运行界面" className="border border-fd-border" /> */}
+
+## 环境要求
+
+|项目|要求|
+|---|---|
+|操作系统|macOS 13.0+、Windows 10 1809+、Ubuntu 20.04+ / Debian 10+|
+|硬件|4 GB 以上内存，x64 或 ARM64 处理器|
+|Node.js|仅 npm 安装方式需要，建议 22 及以上版本|
+|终端|Windows 建议安装 [Git for Windows](https://git-scm.com/downloads/win)，以便 Claude Code 使用 Bash 工具|
+
+## 安装方式
+
+以下方式任选其一即可。
+
+### 官方安装脚本（推荐）
+
+不依赖 Node.js，安装后会在后台自动更新。
+
+macOS / Linux / WSL：
+
+```bash
+curl -fsSL https://claude.ai/install.sh | bash
+```
+
+Windows PowerShell：
+
+```powershell
+irm https://claude.ai/install.ps1 | iex
+```
+
+Windows CMD：
+
+```bash
+curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd
+```
+
+<Callout>
+  若提示 `The token '&&' is not a valid statement separator`，说明当前是 PowerShell 而非 CMD；若提示 `'irm' is not recognized`，则说明当前是 CMD 而非 PowerShell。提示符以 `PS C:\` 开头的是 PowerShell。
+</Callout>
+
+### Homebrew 安装
+
+macOS 用户可使用：
+
+```bash
+brew install --cask claude-code
+```
+
+### npm 安装
+
+已有 Node.js 环境时可使用。npm 包要求 Node.js 22 及以上版本，低版本只会在安装时提示 `EBADENGINE` 警告，不影响使用。
+
+```bash
+npm install -g @anthropic-ai/claude-code
+```
+
+国内网络下载较慢时，可使用镜像源：
+
+```bash
+npm install -g @anthropic-ai/claude-code --registry=https://registry.npmmirror.com
+```
+
+<Callout>
+  请勿使用 `sudo npm install -g`。以管理员权限安装容易造成权限混乱，导致后续更新失败。
+</Callout>
+
+## 验证安装
+
+安装完成后，重新打开终端并执行：
+
+```bash
+claude --version
+```
+
+能够正常输出版本号即表示安装成功。若提示命令不存在，说明安装目录未加入 `PATH`，重新打开终端或重启系统后再试。
+
+诊断安装与配置问题可执行：
+
+```bash
+claude doctor
+```
+
+该命令只读输出安装状态、配置文件校验结果和修复建议，不会启动会话。
+
+{/* 图片位置：claude doctor 输出结果 */}
+{/* <img src="" alt="claude doctor 输出" className="border border-fd-border" /> */}
+
+## 首次运行
+
+进入任意项目目录后执行：
+
+```bash
+claude
+```
+
+首次运行会提示登录方式。使用本站 API 时不需要登录官方账号，完成接口配置后即可直接对话。
+
+## 更新与卸载
+
+官方脚本安装的版本会在后台自动更新，也可立即执行更新：
+
+```bash
+claude update
+```
+
+通过 npm 安装的版本可重新执行安装命令覆盖更新。卸载时执行：
+
+```bash
+npm uninstall -g @anthropic-ai/claude-code
+```
+
+## 接入本站 API
+
+CLI 支持一键导入，推荐使用 CC-Switch 写入配置，切换上游时无需重复填写参数。具体步骤见 [CC-Switch 的配置方法](/docs/ai-api/client-config/cc-switch)。
+
+CLI 支持热重载，在 CC-Switch 中切换供应商后即时生效，无需重启终端。
+
+<Callout type="warning">
+  CLI 与 [Claude Desktop](/docs/ai-api/client-config/install-claude-desktop) 是两个独立的客户端，配置分开存放：CLI 使用 `~/.claude/settings.json`，桌面端使用自己的 3P profile。即使已经为桌面端配置好本站 API，CLI 仍需单独配置一次。
+</Callout>
+
+<Callout>
+  终端中通过 `export` 设置的 `ANTHROPIC_BASE_URL`、`ANTHROPIC_AUTH_TOKEN` 优先级高于配置文件，会覆盖 CC-Switch 写入的值。若切换后不生效，请先清除这些环境变量。
+</Callout>

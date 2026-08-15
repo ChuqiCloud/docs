@@ -1,0 +1,115 @@
+---
+title: 3.5 安装 Codex
+description: 安装 Codex CLI 与 IDE 扩展
+---
+
+# 3.5 安装 Codex
+
+Codex 是 OpenAI 提供的 Agent 客户端，使用 GPT 系列模型。安装完成后，可通过 CC-Switch 接入本站 API。
+
+{/* 图片位置：Codex 运行界面 */}
+{/* <img src="" alt="Codex 运行界面" className="border border-fd-border" /> */}
+
+## 环境要求
+
+|项目|要求|
+|---|---|
+|操作系统|macOS、Linux，或 Windows 10 / 11|
+|Node.js|使用 npm 方式安装时需要，建议使用 18 LTS 及以上版本|
+|网络|需要能够访问本站 API 地址|
+
+## 安装方式
+
+以下方式任选其一即可。
+
+### 官方安装脚本
+
+不依赖 Node.js。
+
+macOS / Linux：
+
+```bash
+curl -fsSL https://chatgpt.com/codex/install.sh | sh
+```
+
+Windows PowerShell：
+
+```powershell
+irm https://chatgpt.com/codex/install.ps1 | iex
+```
+
+### Homebrew 安装
+
+macOS 用户可使用：
+
+```bash
+brew install --cask codex
+```
+
+### npm 安装
+
+```bash
+npm install -g @openai/codex
+```
+
+国内网络下载较慢时，可使用镜像源：
+
+```bash
+npm install -g @openai/codex --registry=https://registry.npmmirror.com
+```
+
+### 下载二进制文件
+
+不方便安装 Node.js 时，可从 [Codex 发布页](https://github.com/openai/codex/releases) 下载对应系统的可执行文件，解压后放入 `PATH` 目录。
+
+{/* 图片位置：发布页选择对应系统的安装包 */}
+{/* <img src="" alt="下载 Codex 二进制文件" className="border border-fd-border" /> */}
+
+## 验证安装
+
+重新打开终端并执行：
+
+```bash
+codex --version
+```
+
+能够正常输出版本号即表示安装成功。若提示命令不存在，说明安装目录未加入 `PATH`，重新打开终端后再试。
+
+## 首次运行
+
+进入任意项目目录后执行：
+
+```bash
+codex
+```
+
+首次运行会提示选择登录方式。使用本站 API 时**不需要**登录 ChatGPT 账号，改用 API Key 方式配置即可。
+
+<Callout>
+  若已使用 ChatGPT 账号登录，请先执行 `codex logout` 退出，避免请求仍走官方地址。可随时执行 `codex login status` 查看当前的登录方式。
+</Callout>
+
+## IDE 扩展
+
+Codex 提供 VS Code 扩展，在扩展市场搜索 `Codex` 安装即可。安装后请在扩展内确认当前使用的接口地址，若未指向本站，按扩展的设置项重新填写。
+
+{/* 图片位置：VS Code 扩展市场中的 Codex */}
+{/* <img src="" alt="Codex VS Code 扩展" className="border border-fd-border" /> */}
+
+## 接入本站 API
+
+Codex 使用 OpenAI 兼容接口，Base URL 需要带 `/v1` 后缀。Codex 支持一键导入，推荐使用 CC-Switch 写入配置，避免手动编辑 `~/.codex/auth.json` 与 `~/.codex/config.toml` 出错。
+
+具体步骤见 [CC-Switch 的配置方法](/docs/ai-api/client-config/cc-switch)。
+
+<Callout>
+  Codex 不支持热重载，在 CC-Switch 中切换供应商后需要关闭当前终端窗口并重新打开，配置才会生效。
+</Callout>
+
+## 常见问题
+
+|现象|处理方式|
+|---|---|
+|`npm install` 报权限错误|不要使用 `sudo`，改为配置 npm 全局目录后重试，或改用二进制方式安装。|
+|提示接口不存在或响应格式错误|协议不匹配，将 `~/.codex/config.toml` 中的 `wire_api` 在 `responses` 与 `chat` 之间切换。|
+|提示模型不存在|当前分组不包含该模型，参见 [模型不存在](/docs/ai-api/faq/model-not-found)。|

@@ -28,8 +28,6 @@ export const source = loader({
             return 'text-orange-600 dark:text-orange-400';
           case 'Bot':
             return 'text-cyan-600 dark:text-cyan-400';
-          case 'Cloud':
-            return 'text-sky-600 dark:text-sky-400';
           default:
             return 'text-gray-600 dark:text-gray-400';
         }

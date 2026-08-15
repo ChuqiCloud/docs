@@ -3,6 +3,9 @@
   "pages": [
     "client-selection",
     "basic-parameters",
+    "install-claude-desktop",
+    "install-claude-cli",
+    "install-codex",
     "cc-switch"
   ],
   "defaultOpen": true

@@ -1,6 +1,263 @@
 ---
-title: 3.3 CC-Switch 的配置方法
-description: 在 CC-Switch 中配置 AI API
+title: 3.6 CC-Switch 的配置方法
+description: 安装 CC-Switch 并接入 Claude Code CLI、Codex 与 Claude Desktop
 ---
 
-在 CC-Switch 的服务配置中填写 AI API 的地址、密钥和模型参数后保存即可使用。
+# 3.6 CC-Switch 的配置方法
+
+CC-Switch 是一款跨平台桌面应用，用于统一管理 Claude Code CLI、Claude Desktop、Codex 等客户端的供应商配置，并在多个上游服务之间快速切换。
+
+本站已支持**一键导入 CC-Switch**：在 API 密钥页面直接生成配置并导入，无需手动复制参数。
+
+<img
+  src="https://img.xwyue.com/i/2026/08/12/6a7be594559c0.png"
+  alt="CC-Switch 主界面"
+  className="border border-fd-border"
+/>
+
+## 各客户端的接入方式
+
+|客户端|接入方式|切换后生效方式|
+|---|---|---|
+|Claude Code CLI|本站一键导入|即时生效，无需重启|
+|Codex|本站一键导入|需重启终端|
+|Claude Desktop|在 CC-Switch 的 Claude Desktop 面板手动添加|需完全退出并重启应用|
+
+<Callout type="warning">
+  在 CC-Switch 中，Claude Code CLI 与 Claude Desktop 是两个独立的面板，配置分开存放：CLI 写入 `~/.claude/settings.json`，Desktop 写入应用自己的 3P profile。为 CLI 配置的供应商不会应用到 Desktop，两者都要用时需要分别配置一次。
+</Callout>
+
+## 安装 CC-Switch
+
+### 系统要求
+
+|系统|最低版本|架构|
+|---|---|---|
+|Windows|Windows 10 及以上|x64|
+|macOS|macOS 12 (Monterey) 及以上|Intel (x64) / Apple Silicon (arm64)|
+|Linux|Ubuntu 22.04+ / Debian 11+ / Fedora 34+|x64 / ARM64|
+
+### 下载安装包
+
+<Callout type="warning">
+  请只从 [ccswitch.io](https://ccswitch.io) 或 [GitHub Releases](https://github.com/farion1231/cc-switch/releases) 获取 CC-Switch。任何要求付费、充值或索取登录凭据的「CC Switch」网站或客户端都不是官方渠道。
+</Callout>
+
+在发布页选择与系统匹配的安装包：
+
+|系统|安装包|
+|---|---|
+|Windows|`CC-Switch-v{版本号}-Windows.msi`，免安装版为 `CC-Switch-v{版本号}-Windows-Portable.zip`|
+|macOS|`CC-Switch-v{版本号}-macOS.dmg`|
+|Linux（Debian / Ubuntu）|`CC-Switch-v{版本号}-Linux-x86_64.deb` 或 `-arm64.deb`|
+|Linux（通用）|`CC-Switch-v{版本号}-Linux-x86_64.AppImage` 或 `-arm64.AppImage`|
+
+<img
+  src="https://img.xwyue.com/i/2026/08/12/6a7be69c500dd.png"
+  alt="下载 CC-Switch 安装包"
+  className="border border-fd-border"
+/>
+
+### 安装步骤
+
+- **Windows**：双击 `.msi` 安装程序，按提示完成安装。若双击后没有任何反应，右键安装包打开「属性」，在「常规」页勾选「解除锁定」后重试。
+- **macOS**：打开 `.dmg`，将 CC Switch 拖入「应用程序」文件夹。macOS 版本已通过 Apple 代码签名和公证，可直接打开，无需额外操作。
+- **Linux**：`.deb` 使用 `sudo dpkg -i` 安装；`.AppImage` 需先赋予执行权限再运行。
+
+macOS 也可使用 Homebrew 安装：
+
+```bash
+brew install --cask cc-switch
+```
+
+Linux 下赋予 `.AppImage` 执行权限：
+
+```bash
+chmod +x CC-Switch-v*-Linux-*.AppImage
+```
+
+### 验证安装
+
+启动 CC-Switch 后确认：应用窗口正常显示、系统托盘出现 CC-Switch 图标、左侧应用切换器中能看到受管应用并可切换面板。
+
+## 准备工作
+
+在开始配置前，请确认已完成以下步骤：
+
+1. 已完成余额充值或套餐订阅。
+2. 已在 [API 密钥](https://apis.extralink.net/keys) 页面创建 API Key，并选择好分组。
+3. 已安装需要接入的客户端：[Claude Desktop](/docs/ai-api/client-config/install-claude-desktop)、[Claude Code CLI](/docs/ai-api/client-config/install-claude-cli) 或 [Codex](/docs/ai-api/client-config/install-codex)。
+4. 已按上一节完成 CC-Switch 的安装。
+
+<Callout>
+  CC-Switch 会直接改写客户端的本地配置文件。首次使用前建议备份 `~/.claude/settings.json` 与 `~/.codex/config.toml`，以便在需要时恢复原有配置。
+</Callout>
+
+## 一键导入（Claude Code CLI 与 Codex）
+
+一键导入基于 CC-Switch 的 `ccswitch://` 深度链接：在本站选好应用和模型后，配置连同 Base URL、API Key 一并写入 CC-Switch，无需手动复制参数。
+
+<Callout>
+  一键导入的应用选项中没有 Claude Desktop。桌面端请按下文「[Claude Desktop 的手动配置](#claude-desktop-的手动配置)」接入。
+</Callout>
+
+### 操作步骤
+
+1. 登录后进入 [API 密钥](https://apis.extralink.net/keys) 页面。
+2. 找到需要使用的 API Key，点击右侧的「一键导入 CC-Switch」。
+
+<img
+  src="https://img.xwyue.com/i/2026/08/12/6a7be792c48ac.png"
+  alt="一键导入 CC-Switch 按钮"
+  className="border border-fd-border"
+/>
+
+3. 在弹出的配置窗口中完成选择：
+
+|字段|说明|
+|---|---|
+|应用|选择 **Claude**（对应 Claude Code CLI）或 **Codex**。|
+|名称|为该配置起一个名字，便于在 CC-Switch 中识别，可用站点名。|
+|主模型|必填，默认使用的主力模型。|
+|Haiku / Sonnet / Opus 模型|可选，分别对应轻量、均衡与最强档位。|
+
+4. 点击「打开 CC Switch」，浏览器询问是否打开 CC-Switch 时选择「允许」或「打开」。
+
+<img
+  src="https://img.xwyue.com/i/2026/08/12/6a7bea3c5e595.png"
+  alt="浏览器唤起 CC-Switch"
+  className="border border-fd-border"
+/>
+
+5. CC-Switch 弹出导入确认窗口，核对供应商名称、Base URL 和 API Key 无误后确认导入。
+
+<img
+  src="https://img.xwyue.com/i/2026/08/12/6a7be7d391463.png"
+  alt="CC-Switch 导入确认"
+  className="border border-fd-border"
+/>
+
+6. 导入完成后，在对应应用面板的供应商列表中点击该条目的「启用」按钮，将其设为当前使用的配置。
+
+<img
+  src="https://img.xwyue.com/i/2026/08/12/6a7bea3ca2b39.png"
+  alt="启用本站供应商配置"
+  className="border border-fd-border"
+/>
+
+### 导入的内容
+
+|CC-Switch 字段|来源|说明|
+|---|---|---|
+|供应商名称|配置窗口中填写的名称|可在 CC-Switch 中随时修改。|
+|Base URL|自动携带|Claude Code CLI 使用 `https://apis.extralink.net`，Codex 使用 `https://apis.extralink.net/v1`。|
+|API Key|自动携带|即所选的 `sk-` 开头密钥。|
+|模型|配置窗口中选择|导入后可在 CC-Switch 中按需修改，具体名称见「模型广场」。|
+
+启用后，CC-Switch 会把配置写入对应客户端的文件：Claude Code CLI 为 `~/.claude/settings.json`，Codex 为 `~/.codex/auth.json` 与 `~/.codex/config.toml`。
+
+<Callout>
+  一键导入携带的是完整 API Key。请勿将导入链接转发给他人或粘贴到公开环境；如已泄露，请到 API 密钥页面删除该密钥并重新创建。
+</Callout>
+
+### 唤起失败的处理
+
+若点击按钮后没有反应，通常是系统未注册 CC-Switch 的协议：
+
+- 确认 CC-Switch 已安装并至少完整启动过一次。
+- 保持 CC-Switch 在后台运行后重试。
+- 浏览器拦截了协议跳转时，在地址栏左侧的权限设置中允许本站打开外部应用。
+- 更换浏览器后重试。
+
+### Claude Code CLI 的注意事项
+
+- CLI 支持热重载，切换供应商后即时生效，无需重启终端。
+- 若终端中已通过 `export` 设置过 `ANTHROPIC_BASE_URL` 或 `ANTHROPIC_AUTH_TOKEN`，环境变量的优先级高于配置文件，会覆盖 CC-Switch 写入的值。请先清除这些变量：
+
+```bash
+unset ANTHROPIC_BASE_URL ANTHROPIC_AUTH_TOKEN ANTHROPIC_API_KEY
+```
+
+- Windows 用户请在「系统属性 → 环境变量」中删除对应条目，再重新打开终端。
+
+## Claude Desktop 的手动配置
+
+Claude Desktop 不支持本站的一键导入，需要在 CC-Switch 的 Claude Desktop 面板中手动添加供应商。
+
+### 支持范围
+
+|项目|说明|
+|---|---|
+|支持系统|macOS、Windows|
+|暂不支持|Linux 写入 Claude Desktop 3P 配置|
+|生效方式|切换供应商后需完全退出并重启 Claude Desktop|
+|配置位置|由 CC-Switch 维护的 3P profile，与 CLI 的 `~/.claude/settings.json` 相互独立|
+
+### 配置步骤
+
+1. 在 CC-Switch 左侧的应用切换器中选择 **Claude Desktop**。若没有该入口，到「设置 → 通用 → 应用可见性」确认它没有被隐藏。
+
+{/* 图片位置：CC-Switch 左侧应用切换器中的 Claude Desktop 面板 */}
+{/* <img src="" alt="Claude Desktop 面板" className="border border-fd-border" /> */}
+
+2. 添加本站供应商，两种方式任选其一：
+
+- **从 Claude Code 导入**：若已经通过一键导入在 Claude Code CLI 面板配置好本站供应商，Claude Desktop 面板会提供「将 Claude Code 中已有的供应商导入」，可直接把已有配置带过来，省去重新填写。
+- **手动添加**：点击右上角的 **+** 按钮，选择自定义供应商，填写名称、接口地址 `https://apis.extralink.net`、API Key 和模型。
+
+{/* 图片位置：Claude Desktop 面板中添加供应商 */}
+{/* <img src="" alt="Claude Desktop 添加供应商" className="border border-fd-border" /> */}
+
+3. 本站的 Claude 系列模型（如 `claude-opus-4-8`）属于 Claude Desktop 可识别的三档角色 ID，保持「需要模型映射」**关闭**，使用直连模式即可。
+4. 在供应商卡片上点击「启用」。
+5. 完全退出并重新打开 Claude Desktop。
+
+<Callout>
+  Claude Desktop 不像 CLI 那样热重载配置，每次切换供应商后都必须完全退出应用再重新打开，仅关闭窗口不生效。
+</Callout>
+
+### 什么时候需要模型映射模式
+
+若要在 Claude Desktop 中使用本站的非 Claude 模型（如 GPT 系列），或模型名不是 `claude-sonnet-*` / `claude-opus-*` / `claude-haiku-*` 形态，直连模式会失败，需要在供应商中开启「需要模型映射」，把上游模型映射到 Sonnet / Opus / Haiku 三个角色。
+
+模型映射模式依赖 CC-Switch 的本地路由：
+
+- 本地路由开关默认隐藏，需在「设置 → 路由 → 本地路由」中开启「在主页面显示本地路由开关」，再回到 Claude Desktop 面板打开它。
+- 使用期间必须保持 CC-Switch 运行，关闭 CC-Switch 后模型映射类供应商将无法工作（直连模式不受影响）。
+
+## 切换与验证
+
+### 切换供应商
+
+在供应商列表中点击目标卡片的「启用」按钮，卡片状态会变为「当前启用」。也可以右键系统托盘的 CC-Switch 图标，在对应应用的子菜单中直接切换，无需打开主界面。
+
+{/* 图片位置：供应商卡片的「启用」按钮与「当前启用」状态 */}
+{/* <img src="" alt="切换供应商" className="border border-fd-border" /> */}
+
+### 生效方式
+
+|客户端|生效方式|
+|---|---|
+|Claude Code CLI|即时生效，无需重启|
+|Codex|需关闭并重新打开终端|
+|Claude Desktop|需完全退出并重启应用|
+
+### 验证是否生效
+
+- Claude Code CLI：在会话中执行 `/status`，确认显示的 API 地址为本站地址。
+- Codex、Claude Desktop：发起一次任意对话，随后在本站控制台的日志页面确认已产生调用记录。
+
+日志中出现对应记录即表示接入成功。CLI 与 Desktop 需要分别验证，其中一个成功不代表另一个也已切换。
+
+## 常见问题
+
+|现象|可能原因与处理|
+|---|---|
+|提示 401 / 无效密钥|API Key 填写错误或已删除，重新创建后再次导入。|
+|提示模型不存在|当前分组不包含该模型，改用分组内的模型名称，参见 [模型不存在](/docs/ai-api/faq/model-not-found)。|
+|切换后仍走旧地址|Codex 未重启终端、Desktop 未完全退出，或存在优先级更高的环境变量，按上文清除后重试。|
+|Desktop 切换成功但没变化|未完全退出应用，仅关闭窗口无效，请退出后重新打开。|
+|Desktop 直连模式报错|模型名不是三档角色 ID，改用模型映射模式并开启本地路由。|
+|切换失败提示写入错误|配置文件被占用或权限不足，关闭正在运行的 CLI 工具后重试。|
+|返回 502|参见 [CCS 502 报错](/docs/ai-api/faq/ccs-502)。|
+|服务不可用|参见 [服务不可用](/docs/ai-api/faq/service-unavailable)。|
