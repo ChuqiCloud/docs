@@ -22,8 +22,8 @@ description: 后端安装文档
 <Callout>
   后端程序运行目录可以自行选择创建
 </Callout>
-
-注意最新程序包可在：[releases](https://gitee.com/chuqicloud/QimenIDC/releases)
+注意最新程序包：[QimenIDC-Server.jar](https://mirror.chuqiyun.com/install/QimenIDC-Server.jar)
+注意最新数据库：[script.sql](https://mirror.chuqiyun.com/install/script.sql)
 
 ## 创建数据库
 导入SQL目录下的`script.sql`文件
@@ -48,6 +48,10 @@ config:
   admin_path: admin
   secret: 123456
   frontend_DomainName: "http://localhost:3003"
+  # 系统日志保留天数，留空默认 180 天
+  system_log_retention_days: 180
+  # 流量统计保留天数，留空默认 15 天
+  flow_data_retention_days: 15
   os_url: https://gitee.com/chuqicloud/soft-ware/raw/master/Cloud/os.json
 
 MySQL:
@@ -56,6 +60,7 @@ MySQL:
   username: root
   password: 123456
   database: pve
+
 ```
 
 将刚才添加的数据库配置信息复制到对应的位置然后保存即可
@@ -82,7 +87,7 @@ MySQL:
 
 ## 安全加固
 <Callout>
-  建议添加一个域名，申请SSL证书，反代api与admin接口，实现SSL安全加固。
+  建议添加一个域名，申请SSL证书，反代api与admin接口，实现SSL安全加固。可以直接反代 / ，不必分开api和admin。
 </Callout>
 <img 
   src="https://img.xwyue.com/v/2026/07/27/6a67102567a6e.png" 
